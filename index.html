@@ -1,0 +1,530 @@
+<!doctype html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ananya Gullapally</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Quicksand:wght@400;500;600&family=Allura&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --cream: #FDF6E3;
+      --cream-dark: #F5ECD7;
+      --vine-green: #4A7C59;
+      --vine-light: #6B9B7A;
+      --vine-dark: #3D5A45;
+      --text-brown: #5D4E37;
+      --text-light: #8B7355;
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: var(--cream);
+      color: var(--text-brown);
+      box-sizing: border-box;
+    }
+
+    .main-wrapper {
+      width: 100%;
+      min-height: 100%;
+      overflow-x: hidden;
+      background: var(--cream);
+    }
+
+    .font-serif {
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    .font-cursive {
+      font-family: 'Allura', cursive;
+    }
+
+    .vine-left, .vine-right {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      width: 120px;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .vine-left { left: 0; }
+    .vine-right {
+      right: 0;
+      transform: scaleX(-1);
+    }
+
+    .vine-svg {
+      height: 100%;
+      width: 100%;
+    }
+
+    .section-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem;
+      font-weight: 500;
+      color: var(--vine-dark);
+      text-align: center;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--vine-green), transparent);
+      margin: 0.75rem auto 0;
+    }
+
+    .card {
+      background: var(--cream-dark);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      border: 1px solid rgba(74, 124, 89, 0.15);
+      box-shadow: 0 4px 20px rgba(93, 78, 55, 0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(93, 78, 55, 0.12);
+    }
+
+    .nav-pill {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(74, 124, 89, 0.2);
+      border-radius: 50px;
+      padding: 0.5rem 1rem;
+      box-shadow: 0 4px 20px rgba(93, 78, 55, 0.1);
+    }
+
+    .nav-link {
+      color: var(--text-light);
+      padding: 0.5rem 0.75rem;
+      border-radius: 25px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .nav-link:hover,
+    .nav-link.active-link {
+      color: var(--vine-green);
+      background: rgba(74, 124, 89, 0.1);
+    }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.25rem;
+      background: var(--vine-green);
+      color: var(--cream);
+      border-radius: 50px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border: 2px solid var(--vine-green);
+      cursor: pointer;
+    }
+
+    .social-btn:hover {
+      background: transparent;
+      color: var(--vine-green);
+    }
+
+    .skill-tag {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background: linear-gradient(135deg, rgba(74, 124, 89, 0.15), rgba(107, 155, 122, 0.1));
+      color: var(--vine-dark);
+      border-radius: 25px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin: 0.25rem;
+      border: 1px solid rgba(74, 124, 89, 0.2);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-left: 2rem;
+      padding-bottom: 1.5rem;
+      border-left: 2px solid rgba(74, 124, 89, 0.3);
+    }
+
+    .timeline-item:last-child {
+      border-left: 2px solid transparent;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -8px;
+      top: 0;
+      width: 14px;
+      height: 14px;
+      background: var(--vine-green);
+      border-radius: 50%;
+      border: 3px solid var(--cream);
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.5rem;
+      background: var(--cream-dark);
+      border-radius: 12px;
+      text-decoration: none;
+      color: var(--text-brown);
+      border: 1px solid rgba(74, 124, 89, 0.15);
+      transition: all 0.3s ease;
+    }
+
+    .contact-link:hover {
+      background: var(--vine-green);
+      color: var(--cream);
+      transform: translateX(5px);
+    }
+
+    .project-card-link {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+    }
+
+    .project-card-link:hover {
+      color: inherit;
+    }
+
+    @media (max-width: 768px) {
+      .vine-left, .vine-right {
+        width: 64px;
+      }
+
+      .font-cursive {
+        font-size: 3.25rem !important;
+      }
+    }
+  </style>
+</head>
+<body class="h-full">
+  <div class="main-wrapper">
+    <div class="vine-left">
+      <svg class="vine-svg" viewBox="0 0 120 800" preserveAspectRatio="xMinYMin slice">
+        <defs>
+          <linearGradient id="vineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#3D5A45" />
+            <stop offset="100%" style="stop-color:#4A7C59" />
+          </linearGradient>
+        </defs>
+        <path d="M 60 0 Q 40 100 55 200 Q 70 300 45 400 Q 30 500 50 600 Q 65 700 40 800" stroke="url(#vineGradient)" stroke-width="4" fill="none" opacity="0.8" />
+        <path d="M 55 0 Q 35 150 50 300 Q 65 450 40 600 Q 25 750 45 900" stroke="#6B9B7A" stroke-width="2" fill="none" opacity="0.5" />
+        <g><ellipse cx="35" cy="80" rx="20" ry="12" fill="#4A7C59" opacity="0.7" transform="rotate(-30 35 80)" /></g>
+        <g><ellipse cx="65" cy="160" rx="22" ry="13" fill="#6B9B7A" opacity="0.6" transform="rotate(25 65 160)" /></g>
+        <g><ellipse cx="30" cy="250" rx="18" ry="10" fill="#4A7C59" opacity="0.75" transform="rotate(-20 30 250)" /></g>
+        <g><ellipse cx="60" cy="340" rx="24" ry="14" fill="#6B9B7A" opacity="0.65" transform="rotate(35 60 340)" /></g>
+        <g><ellipse cx="25" cy="420" rx="20" ry="11" fill="#4A7C59" opacity="0.7" transform="rotate(-25 25 420)" /></g>
+        <g><ellipse cx="55" cy="520" rx="22" ry="13" fill="#6B9B7A" opacity="0.6" transform="rotate(20 55 520)" /></g>
+        <g><ellipse cx="35" cy="600" rx="19" ry="11" fill="#4A7C59" opacity="0.7" transform="rotate(-35 35 600)" /></g>
+        <g><ellipse cx="60" cy="700" rx="21" ry="12" fill="#6B9B7A" opacity="0.65" transform="rotate(30 60 700)" /></g>
+        <circle cx="45" cy="120" r="4" fill="#7BAF8B" opacity="0.5" />
+        <circle cx="40" cy="290" r="3" fill="#7BAF8B" opacity="0.4" />
+        <circle cx="50" cy="460" r="4" fill="#7BAF8B" opacity="0.5" />
+        <circle cx="35" cy="650" r="3" fill="#7BAF8B" opacity="0.4" />
+      </svg>
+    </div>
+
+    <div class="vine-right">
+      <svg class="vine-svg" viewBox="0 0 120 800" preserveAspectRatio="xMinYMin slice">
+        <defs>
+          <linearGradient id="vineGradient2" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#3D5A45" />
+            <stop offset="100%" style="stop-color:#4A7C59" />
+          </linearGradient>
+        </defs>
+        <path d="M 60 0 Q 40 100 55 200 Q 70 300 45 400 Q 30 500 50 600 Q 65 700 40 800" stroke="url(#vineGradient2)" stroke-width="4" fill="none" opacity="0.8" />
+        <path d="M 55 0 Q 35 150 50 300 Q 65 450 40 600 Q 25 750 45 900" stroke="#6B9B7A" stroke-width="2" fill="none" opacity="0.5" />
+        <g><ellipse cx="35" cy="100" rx="20" ry="12" fill="#4A7C59" opacity="0.7" transform="rotate(-30 35 100)" /></g>
+        <g><ellipse cx="65" cy="200" rx="22" ry="13" fill="#6B9B7A" opacity="0.6" transform="rotate(25 65 200)" /></g>
+        <g><ellipse cx="30" cy="320" rx="18" ry="10" fill="#4A7C59" opacity="0.75" transform="rotate(-20 30 320)" /></g>
+        <g><ellipse cx="60" cy="430" rx="24" ry="14" fill="#6B9B7A" opacity="0.65" transform="rotate(35 60 430)" /></g>
+        <g><ellipse cx="25" cy="550" rx="20" ry="11" fill="#4A7C59" opacity="0.7" transform="rotate(-25 25 550)" /></g>
+        <g><ellipse cx="55" cy="670" rx="22" ry="13" fill="#6B9B7A" opacity="0.6" transform="rotate(20 55 670)" /></g>
+        <g><ellipse cx="35" cy="760" rx="19" ry="11" fill="#4A7C59" opacity="0.7" transform="rotate(-35 35 760)" /></g>
+        <circle cx="45" cy="150" r="4" fill="#7BAF8B" opacity="0.5" />
+        <circle cx="40" cy="380" r="3" fill="#7BAF8B" opacity="0.4" />
+        <circle cx="50" cy="610" r="4" fill="#7BAF8B" opacity="0.5" />
+      </svg>
+    </div>
+
+    <nav class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50">
+      <div class="nav-pill flex items-center gap-1 flex-wrap justify-center">
+        <a href="#" class="nav-link" data-page="home">Home</a>
+        <a href="#" class="nav-link" data-page="skills">Skills</a>
+        <a href="#" class="nav-link" data-page="experience">Experience</a>
+        <a href="#" class="nav-link" data-page="projects">Projects</a>
+        <a href="#" class="nav-link" data-page="contact">Contact</a>
+      </div>
+    </nav>
+
+    <section id="home" class="page h-screen flex items-center justify-center px-4 pt-[7rem] overflow-hidden">
+      <div class="text-center max-w-2xl mx-auto">
+        <h1 class="font-cursive text-6xl md:text-7xl font-medium mb-6 whitespace-nowrap" style="color: #3D5A45;">Ananya Gullapally</h1>
+        <p class="font-serif text-2xl md:text-3xl italic mb-8" style="color: #8B7355;">Data, AI and Analytics</p>
+
+        <div class="card mb-8 text-left" style="margin-top: 3rem;">
+          <h3 class="font-serif text-xl mb-3" style="color: #3D5A45;">About Me</h3>
+          <p class="leading-relaxed" style="color: #5D4E37;">
+            I’m a graduate student in Artificial Intelligence and Business Analytics at the University of South Florida, passionate about building end-to-end data systems and applied AI solutions. My work focuses on transforming raw data into reliable pipelines, analytics platforms, and intelligent applications. I enjoy designing systems that combine data engineering, machine learning, and practical business insights — from cloud analytics warehouses to real-time data pipelines and AI-powered applications.
+          </p>
+        </div>
+
+        <div class="flex justify-center gap-6 mb-8" style="margin-top: 2rem;">
+          <a href="https://www.linkedin.com/in/ananyagullapally" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="LinkedIn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zM7.119 20.452H3.555V9h3.564v11.452z"/></svg>
+          </a>
+          <a href="https://github.com/ananyagullapally" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="GitHub">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12a12 12 0 008.207 11.387c.6.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.762-1.604-2.665-.304-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.536-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.52 11.52 0 0112 5.8c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.873.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.103.823 2.222v3.293c0 .319.192.694.801.576A12.001 12.001 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          </a>
+          <a href="#" class="social-btn" aria-label="Contact" data-page="contact">✉️</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="page px-4" style="display: none; height: 100vh; overflow: hidden;">
+      <div class="section-container" style="padding-top: 6rem;">
+        <h2 class="section-title">Skills</h2>
+        <div class="card">
+          <h3 class="font-serif text-xl mb-4" style="color: #3D5A45;">Languages &amp; Frameworks</h3>
+          <div class="flex flex-wrap gap-2 mb-6">
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">SQL</span>
+            <span class="skill-tag">R</span>
+            <span class="skill-tag">C#</span>
+            <span class="skill-tag">REST APIs</span>
+          </div>
+
+          <h3 class="font-serif text-xl mb-4" style="color: #3D5A45;">Tools &amp; Technologies</h3>
+          <div class="flex flex-wrap gap-2 mb-6">
+            <span class="skill-tag">PostgreSQL</span>
+            <span class="skill-tag">MySQL</span>
+            <span class="skill-tag">Docker</span>
+            <span class="skill-tag">AWS</span>
+            <span class="skill-tag">Airflow</span>
+            <span class="skill-tag">dbt</span>
+            <span class="skill-tag">Snowflake</span>
+            <span class="skill-tag">BigQuery</span>
+          </div>
+
+          <h3 class="font-serif text-xl mb-4" style="color: #3D5A45;">Focus Areas</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-tag">Data Engineering</span>
+            <span class="skill-tag">Analytics Engineering</span>
+            <span class="skill-tag">Machine Learning</span>
+            <span class="skill-tag">Data Visualization</span>
+            <span class="skill-tag">ETL / ELT Pipelines</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience" class="page py-20 px-4" style="display: none; min-height: 100vh;">
+      <div class="section-container" style="padding-top: 0.5rem;">
+        <h2 class="section-title">Experience</h2>
+        <div class="space-y-6">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="card ml-2">
+              <div class="flex justify-between items-start flex-wrap gap-2 mb-2">
+                <h3 class="font-serif text-xl font-medium" style="color: #3D5A45;">Student Assistant – AI &amp; Supply Chain Analytics</h3>
+                <span class="text-sm px-3 py-1 rounded-full" style="background: rgba(74, 124, 89, 0.1); color: #4A7C59;">Jan 2025 – Present</span>
+              </div>
+              <p class="font-medium mb-2" style="color: #8B7355;">University of South Florida – Muma College of Business</p>
+              <p class="text-sm leading-relaxed" style="color: #5D4E37;">Built a satellite-imagery analytics pipeline processing 100+ scenes (2021–2023) to quantify maritime congestion during global supply chain disruption. Applied CNN/SSD object detection to identify and count ships (50–200 per scene) and convert detections into daily congestion metrics. Developed operational indicators showing backlog peaks of about 200 vessels/day and post-recovery normalization, demonstrating how AI and remote sensing can provide near-real-time logistics insights.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="card ml-2">
+              <div class="flex justify-between items-start flex-wrap gap-2 mb-2">
+                <h3 class="font-serif text-xl font-medium" style="color: #3D5A45;">Python Teaching Fellow – Environmental &amp; Remote Sensing Analytics</h3>
+                <span class="text-sm px-3 py-1 rounded-full" style="background: rgba(74, 124, 89, 0.1); color: #4A7C59;">Jun 2025</span>
+              </div>
+              <p class="font-medium mb-2" style="color: #8B7355;">University of South Florida</p>
+              <p class="text-sm leading-relaxed" style="color: #5D4E37;">Led a Python data science workshop for 20+ students, building end-to-end analytical workflows from raw spectrometer data to NDVI calculation, visualization, and Decision Tree classification using pandas, matplotlib, and scikit-learn. Created 6+ reproducible Jupyter notebooks integrating spectroscopy data, drone imagery, and multi-temporal Landsat and PACE satellite datasets.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="card ml-2">
+              <div class="flex justify-between items-start flex-wrap gap-2 mb-2">
+                <h3 class="font-serif text-xl font-medium" style="color: #3D5A45;">Marketing Analytics Intern</h3>
+                <span class="text-sm px-3 py-1 rounded-full" style="background: rgba(74, 124, 89, 0.1); color: #4A7C59;">Jan 2024 – Jun 2024</span>
+              </div>
+              <p class="font-medium mb-2" style="color: #8B7355;">Aashwaadha Media – Hyderabad, India</p>
+              <p class="text-sm leading-relaxed" style="color: #5D4E37;">Engineered a Python/SQL ETL pipeline consolidating sales data from multiple retail stores with e-commerce traffic, improving inventory synchronization accuracy to 87%. Built a real-time API pipeline that updates gold pricing across the website and POS every 15 minutes and developed an automated image-processing pipeline for 10,000+ jewelry SKUs.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="card ml-2">
+              <div class="flex justify-between items-start flex-wrap gap-2 mb-2">
+                <h3 class="font-serif text-xl font-medium" style="color: #3D5A45;">Club Lead – Google Developer Student Clubs</h3>
+                <span class="text-sm px-3 py-1 rounded-full" style="background: rgba(74, 124, 89, 0.1); color: #4A7C59;">Jul 2022 – Jun 2023</span>
+              </div>
+              <p class="font-medium mb-2" style="color: #8B7355;">Vidya Jyothi Institute of Technology</p>
+              <p class="text-sm leading-relaxed" style="color: #5D4E37;">Led a team of 10 students and organized 20+ technical workshops, hackathons, and speaker sessions, increasing outreach and participation by 3× while achieving Tier-1 chapter status for community engagement.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="page py-20 px-4" style="display: none; min-height: 100vh;">
+      <div class="section-container" style="padding-top: 0.5rem;">
+        <h2 class="section-title">Projects</h2>
+        <div class="grid gap-6">
+          <a href="https://github.com/ananyagullapally/ridestream" target="https://github.com/ananyagullapally/ridestream" rel="noopener noreferrer" class="project-card-link">
+            <div class="card">
+              <div class="flex items-start gap-4">
+                <div class="w-16 h-16 rounded-xl flex items-center justify-center text-3xl" style="background: linear-gradient(135deg, rgba(74,124,89,0.2), rgba(107,155,122,0.1));">🚕</div>
+                <div class="flex-1">
+                  <h3 class="font-serif text-xl font-medium mb-2" style="color:#3D5A45;">RideStream – Real-Time Ride Data Pipeline</h3>
+                  <p class="text-sm mb-3 leading-relaxed" style="color:#5D4E37;">Built a real-time streaming pipeline that simulates ride-sharing events and processes them using Kafka and Spark Structured Streaming. Events are streamed through Kafka topics, aggregated in real time, and stored in PostgreSQL for downstream analytics.</p>
+                  <p class="text-xs" style="color:#8B7355;">Tech: Python, Kafka, Spark Structured Streaming, PostgreSQL, Docker</p>
+                </div>
+              </div>
+            </div>
+          </a>
+
+          <a href="https://github.com/ananyagullapally/containerized-elt-pipeline" target="https://github.com/ananyagullapally/containerized-elt-pipeline" rel="noopener noreferrer" class="project-card-link">
+            <div class="card">
+              <div class="flex items-start gap-4">
+                <div class="w-16 h-16 rounded-xl flex items-center justify-center text-3xl" style="background: linear-gradient(135deg, rgba(74,124,89,0.2), rgba(107,155,122,0.1));">⚙️</div>
+                <div class="flex-1">
+                  <h3 class="font-serif text-xl font-medium mb-2" style="color:#3D5A45;">Containerized ELT Pipeline for E-Commerce Analytics</h3>
+                  <p class="text-sm mb-3 leading-relaxed" style="color:#5D4E37;">Designed a Dockerized ELT pipeline that ingests and transforms large volumes of e-commerce transactions into analytics-ready PostgreSQL tables using modular SQL transformations and dbt-style modeling.</p>
+                  <p class="text-xs" style="color:#8B7355;">Tech: Python, SQL, PostgreSQL, Docker, dbt</p>
+                </div>
+              </div>
+            </div>
+          </a>
+
+          <a href="https://github.com/ananyagullapally" target="_blank" rel="noopener noreferrer" class="project-card-link">
+            <div class="card">
+              <div class="flex items-start gap-4">
+                <div class="w-16 h-16 rounded-xl flex items-center justify-center text-3xl" style="background: linear-gradient(135deg, rgba(74,124,89,0.2), rgba(107,155,122,0.1));">🤖</div>
+                <div class="flex-1">
+                  <h3 class="font-serif text-xl font-medium mb-2" style="color:#3D5A45;">Fraud Detection MLOps System</h3>
+                  <p class="text-sm mb-3 leading-relaxed" style="color:#5D4E37;">Implemented an end-to-end fraud detection pipeline for highly imbalanced financial transactions, including model training, evaluation, and threshold optimization while designing the workflow with production ML lifecycle practices.</p>
+                  <p class="text-xs" style="color:#8B7355;">Tech: Python, Scikit-Learn, ML Pipelines</p>
+                </div>
+              </div>
+            </div>
+          </a>
+
+          <a href="https://github.com/ananyagullapally/eduvision" target="https://github.com/ananyagullapally/eduvision" rel="noopener noreferrer" class="project-card-link">
+            <div class="card">
+              <div class="flex items-start gap-4">
+                <div class="w-16 h-16 rounded-xl flex items-center justify-center text-3xl" style="background: linear-gradient(135deg, rgba(74,124,89,0.2), rgba(107,155,122,0.1));">🎓</div>
+                <div class="flex-1">
+                  <h3 class="font-serif text-xl font-medium mb-2" style="color:#3D5A45;">EduVision – Academic Management Platform</h3>
+                  <p class="text-sm mb-3 leading-relaxed" style="color:#5D4E37;">Developed a full-stack academic management system with role-based dashboards, course management features, and analytics views for tracking enrollment and academic performance.</p>
+                  <p class="text-xs" style="color:#8B7355;">Tech: C#, ASP.NET Core MVC, SQL</p>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="page py-20 px-4" style="display: none; min-height: 100vh;">
+      <div class="section-container" style="padding-top: 0.5rem;">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="card text-center mb-8">
+          <p class="font-serif text-xl mb-2" style="color: #3D5A45;">Let’s build something with data.</p>
+          <p class="text-sm" style="color: #5D4E37;">Open to collaborations, internships, and coffee chats about data, AI, and analytics.</p>
+        </div>
+
+        <div class="flex justify-center gap-6 mt-6">
+          <a href="https://www.linkedin.com/in/ananyagullapally" target="_blank" rel="noopener noreferrer" class="contact-link">
+            <span class="font-medium">Connect on LinkedIn</span>
+          </a>
+          <a href="https://github.com/ananyagullapally" target="_blank" rel="noopener noreferrer" class="contact-link">
+            <span class="font-medium">Follow on GitHub</span>
+          </a>
+           <a href="mailto:ananyagp3@gmail.com" class="contact-link">
+            <span class="font-medium">Send an Email</span>
+          </a>
+        </div>
+
+        <div class="text-center mt-16 pt-8 border-t" style="border-color: rgba(74, 124, 89, 0.2);">
+          <p class="text-sm" style="color: #8B7355;">Made with love and lots of coffee</p>
+          <p class="text-xs mt-2" style="color: #8B7355;">Thanks for visiting my digital garden</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const pages = document.querySelectorAll('.page');
+    const navLinks = document.querySelectorAll('.nav-link, .social-btn[data-page]');
+
+    function showPage(pageId) {
+      pages.forEach((page) => {
+        page.style.display = page.id === pageId ? (pageId === 'home' ? 'flex' : 'block') : 'none';
+      });
+
+      navLinks.forEach((link) => {
+        link.classList.toggle('active-link', link.dataset.page === pageId);
+      });
+    }
+
+    navLinks.forEach((link) => {
+      link.addEventListener('click', (event) => {
+        event.preventDefault();
+        const pageId = link.dataset.page;
+        if (pageId) {
+          showPage(pageId);
+        }
+      });
+    });
+
+    showPage('home');
+
+    console.assert(document.querySelectorAll('.page').length === 5, 'Expected 5 pages');
+    console.assert(document.querySelectorAll('.project-card-link').length === 4, 'Expected 4 project links');
+    console.assert(document.querySelectorAll('.nav-link').length === 5, 'Expected 5 nav links');
+    console.assert(document.querySelectorAll('.social-btn[data-page]').length === 1, 'Expected 1 contact trigger button');
+    console.assert(typeof showPage === 'function', 'showPage should be defined');
+    
+    
+    
+  </script>
+</body>
+</html>
